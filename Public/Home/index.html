@@ -91,13 +91,13 @@
 
       createCanvasButton.addEventListener("click", () => {
         // Send a POST request to the server to create a new canvas
-        fetch("http://localhost:3001/create-canvas", {
+        fetch("https://sharesketch-2-0.onrender.com/create-canvas", {
           method: "POST",
         })
           .then((res) => res.json())
           .then((canvasId) => {
             // Redirect the user to the newly created canvas with the unique ID
-            window.location.href = `http://localhost:3001/${canvasId}`;
+            window.location.href = `https://sharesketch-2-0.onrender.com/${canvasId}`;
           })
           .catch((error) => {
             console.error("Error creating new canvas:", error);
@@ -107,7 +107,7 @@
       boardUrlButton.addEventListener("click", () => {
         const boardUrl = boardUrlInput.value;
         if (boardUrl !== "") {
-          window.location.href = `http://localhost:3001/${boardUrl}`;
+          window.location.href = `https://sharesketch-2-0.onrender.com/${boardUrl}`;
         }
       });
     </script>

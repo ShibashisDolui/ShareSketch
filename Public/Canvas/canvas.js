@@ -1,5 +1,5 @@
 const boardUrl = window.location.pathname.substring(1);
-fetch("http://localhost:3001/state/", {
+fetch("https://sharesketch-2-0.onrender.com/state/", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
