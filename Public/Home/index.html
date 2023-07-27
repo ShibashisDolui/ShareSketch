@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShareSketch</title>
+    <style>
+      body {
+        /* display: flex; */
+        flex-direction: column;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: #f2f2f2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      h1 {
+        font-size: 28px;
+        margin-bottom: 10px;
+        color: #333;
+      }
+
+      h2 {
+        font-size: 18px;
+        margin: 10px 0;
+        color: #666;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      input[type="text"] {
+        width: 300px;
+        margin-right: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        background-color: #e0efff;
+        border: 1px solid #007bff;
+      }
+
+      /* Center the buttons on small screens */
+      @media (max-width: 480px) {
+        .buttons-container {
+          flex-direction: column;
+        }
+
+        .buttons-container > * {
+          margin-right: 0;
+          margin-bottom: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Welcome to ShareSketch</h1>
+
+    <div>
+      <button id="createCanvasBtn">Create New Canvas</button>
+    </div>
+    <div>
+      <h2>or</h2>
+    </div>
+    <div>
+      <input type="text" placeholder="Enter board url" id="board-url-input" />
+      <button id="board-url-button">Go to an existing board</button>
+    </div>
+    <!-- ... Rest of your HTML code ... -->
+    <script>
+      const createCanvasButton = document.getElementById("createCanvasBtn");
+      const boardUrlButton = document.getElementById("board-url-button");
+      const boardUrlInput = document.getElementById("board-url-input");
+
+      createCanvasButton.addEventListener("click", () => {
+        // Send a POST request to the server to create a new canvas
+        fetch("http://localhost:3001/create-canvas", {
+          method: "POST",
+        })
+          .then((res) => res.json())
+          .then((canvasId) => {
+            // Redirect the user to the newly created canvas with the unique ID
+            window.location.href = `http://localhost:3001/${canvasId}`;
+          })
+          .catch((error) => {
+            console.error("Error creating new canvas:", error);
+          });
+      });
+
+      boardUrlButton.addEventListener("click", () => {
+        const boardUrl = boardUrlInput.value;
+        if (boardUrl !== "") {
+          window.location.href = `http://localhost:3001/${boardUrl}`;
+        }
+      });
+    </script>
+  </body>
+</html>
